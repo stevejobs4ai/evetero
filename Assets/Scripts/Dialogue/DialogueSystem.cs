@@ -11,7 +11,8 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI; // swap for TextMeshPro if preferred
+using UnityEngine.UI;
+using TMPro;
 
 namespace Evetero
 {
@@ -23,11 +24,11 @@ namespace Evetero
         [Tooltip("Root panel to show/hide when dialogue starts/ends.")]
         public GameObject dialoguePanel;
 
-        [Tooltip("Text component for the speaker's name.")]
-        public Text speakerNameText;       // swap to TMP_Text if using TextMeshPro
+        [Tooltip("TextMeshPro component for the speaker's name.")]
+        public TMP_Text speakerNameText;
 
-        [Tooltip("Text component for the dialogue line.")]
-        public Text dialogueLineText;      // swap to TMP_Text if using TextMeshPro
+        [Tooltip("TextMeshPro component for the dialogue line.")]
+        public TMP_Text dialogueLineText;
 
         [Tooltip("Image component for the speaker's portrait.")]
         public Image speakerPortraitImage;
@@ -85,7 +86,6 @@ namespace Evetero
         {
             if (!_isPlaying) return;
 
-            // Cancel any pending auto-advance
             if (_autoAdvanceCoroutine != null)
             {
                 StopCoroutine(_autoAdvanceCoroutine);
@@ -102,7 +102,6 @@ namespace Evetero
 
         /// <summary>
         /// Skip the entire dialogue immediately.
-        /// Wire to a Skip button or long-press gesture.
         /// </summary>
         public void Skip()
         {
@@ -126,7 +125,6 @@ namespace Evetero
         {
             DialogueLine line = _currentDialogue.GetLine(_currentLineIndex);
 
-            // Push to UI components
             if (speakerNameText  != null) speakerNameText.text  = line.speakerName;
             if (dialogueLineText != null) dialogueLineText.text  = line.lineText;
 
@@ -137,10 +135,8 @@ namespace Evetero
                 if (hasPortrait) speakerPortraitImage.sprite = line.speakerPortrait;
             }
 
-            // Fire event (useful for typewriter effects, screen shake, etc.)
             OnLineDisplayed?.Invoke(line);
 
-            // Auto-advance if delay is set
             if (line.autoAdvanceDelay > 0f)
                 _autoAdvanceCoroutine = StartCoroutine(AutoAdvance(line.autoAdvanceDelay));
         }
@@ -167,10 +163,7 @@ namespace Evetero
 
         private void Start()
         {
-            // Hide panel at startup; it activates when Play() is called
             if (dialoguePanel != null) dialoguePanel.SetActive(false);
-
-            // Wire buttons if they're assigned
             if (nextButton != null) nextButton.onClick.AddListener(Next);
             if (skipButton != null) skipButton.onClick.AddListener(Skip);
         }
@@ -182,30 +175,3 @@ namespace Evetero
         }
     }
 }
-
-/*
- * ── USAGE EXAMPLE ────────────────────────────────────────────────────────────
- *
- * // From any other script (trigger zone, CutsceneManager, etc.):
- * [SerializeField] private DialogueSystem dialogueSystem;
- * [SerializeField] private DialogueData   miraIntroDialogue;
- *
- * void OnPlayerEnterZone()
- * {
- *     dialogueSystem.OnDialogueComplete += OnMiraIntroDone;
- *     dialogueSystem.Play(miraIntroDialogue);
- * }
- *
- * void OnMiraIntroDone()
- * {
- *     dialogueSystem.OnDialogueComplete -= OnMiraIntroDone;
- *     // unlock next waypoint, trigger combat, etc.
- * }
- *
- * ── SWAPPING STORIES ─────────────────────────────────────────────────────────
- *
- * The DialogueSystem doesn't know or care which story it's playing.
- * Feed it Dialogue_MiraIntro.asset today, Dialogue_Chapter2_Boss.asset tomorrow.
- * That's the entire "swappable story" design.
- * ─────────────────────────────────────────────────────────────────────────────
- */
