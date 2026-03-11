@@ -16,6 +16,13 @@ namespace Evetero
         [Tooltip("Goblin Scout enemy data asset — assign in Inspector.")]
         public EnemyData goblinScoutData;
 
+        [Header("Crafting Stations")]
+        [Tooltip("Recipes available at the village Furnace — assign CraftingRecipeData assets.")]
+        public CraftingRecipeData[] furnaceRecipes;
+
+        [Tooltip("Recipes available at the village Anvil — assign CraftingRecipeData assets.")]
+        public CraftingRecipeData[] anvilRecipes;
+
         // ── Unity lifecycle ───────────────────────────────────────────────────
 
         private void Start()
@@ -40,6 +47,16 @@ namespace Evetero
             // Buildings
             CreateBuilding("Workbench", new Vector3(-5f, -3f, 0f), Color.yellow);
             CreateBuilding("Guild Hall", new Vector3( 5f, -3f, 0f), Color.blue);
+
+            // Crafting stations
+            CreateCraftingStation("Furnace", new Vector3(-2f, -3f, 0f),
+                new Color(0.8f, 0.35f, 0.05f), CraftingStationType.Furnace, furnaceRecipes);
+            CreateCraftingStation("Anvil",   new Vector3( 2f, -3f, 0f),
+                new Color(0.45f, 0.45f, 0.5f),  CraftingStationType.Anvil,   anvilRecipes);
+
+            // Crafting UI (creates its own Canvas in Awake)
+            var craftingUIGO = new GameObject("CraftingUI");
+            craftingUIGO.AddComponent<CraftingUI>();
 
             // Heroes
             CreateHero("Mira", new Vector3(0f, 0f, 0f));
@@ -111,6 +128,30 @@ namespace Evetero
             data.storageCapacity = 200;
             wni.nodeData = data;
 
+            return go;
+        }
+
+        private GameObject CreateCraftingStation(string stationName, Vector3 pos,
+            Color color, CraftingStationType stationType, CraftingRecipeData[] stationRecipes)
+        {
+            var go = new GameObject(stationName);
+            go.transform.position = pos;
+
+            var sr = go.AddComponent<SpriteRenderer>();
+            sr.sprite       = MakeSprite(36, 36, color);
+            sr.sortingOrder = 1;
+
+            go.AddComponent<BoxCollider2D>().size = Vector2.one;
+
+            // Add a Rigidbody2D (kinematic) so trigger callbacks fire reliably.
+            var rb       = go.AddComponent<Rigidbody2D>();
+            rb.bodyType  = RigidbodyType2D.Static;
+
+            var station         = go.AddComponent<CraftingStation>();
+            station.stationType = stationType;
+            station.recipes     = stationRecipes;
+
+            Debug.Log($"[EmberVillageSetup] Spawned {stationType} station '{stationName}'.");
             return go;
         }
 

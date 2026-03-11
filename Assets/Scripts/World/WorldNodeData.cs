@@ -34,7 +34,35 @@ namespace Evetero
         Stone,
         Food,
         Mana,       // magical resource for advanced abilities
-        Iron
+        Iron,
+
+        // ── Logs (Fletching / Crafting) ───────────────────────────────────────
+        OakLog,
+        WillowLog,
+        YewLog,
+
+        // ── Ores (Mining / Smithing) ──────────────────────────────────────────
+        CopperOre,
+        TinOre,
+        CoalOre,
+        MithrilOre,
+
+        // ── Fletching components ──────────────────────────────────────────────
+        ArrowShaft,
+        Bowstring,
+
+        // ── Smithed bars ──────────────────────────────────────────────────────
+        BronzeBar,
+        IronBar,
+        SteelBar,
+        MithrilBar,
+
+        // ── Finished goods ────────────────────────────────────────────────────
+        OakShortbow,
+        YewLongbow,
+        BronzeSword,
+        IronPlatebody,
+        CookedFish
     }
 
     // ── WorldNodeData ScriptableObject ───────────────────────────────────────

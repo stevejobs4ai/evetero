@@ -1,0 +1,143 @@
+{
+  "recipes": [
+    {
+      "recipeName": "Arrow Shafts",
+      "description": "Whittle a log into 15 arrow shafts. The foundation of Fletching.",
+      "requiredSkill": "Fletching",
+      "requiredLevel": 1,
+      "xpReward": 5,
+      "stationType": "FletchingBench",
+      "craftTimeSeconds": 2.0,
+      "ingredients": [
+        { "type": "Wood", "amount": 1 }
+      ],
+      "outputs": [
+        { "type": "ArrowShaft", "amount": 15 }
+      ]
+    },
+    {
+      "recipeName": "Oak Shortbow",
+      "description": "A shortbow cut and strung from oak. Requires level 20 Fletching.",
+      "requiredSkill": "Fletching",
+      "requiredLevel": 20,
+      "xpReward": 50,
+      "stationType": "FletchingBench",
+      "craftTimeSeconds": 2.0,
+      "ingredients": [
+        { "type": "OakLog",    "amount": 1 },
+        { "type": "Bowstring", "amount": 1 }
+      ],
+      "outputs": [
+        { "type": "OakShortbow", "amount": 1 }
+      ]
+    },
+    {
+      "recipeName": "Yew Longbow",
+      "description": "A powerful longbow crafted from a yew log. Requires level 70 Fletching.",
+      "requiredSkill": "Fletching",
+      "requiredLevel": 70,
+      "xpReward": 120,
+      "stationType": "FletchingBench",
+      "craftTimeSeconds": 2.0,
+      "ingredients": [
+        { "type": "YewLog",    "amount": 1 },
+        { "type": "Bowstring", "amount": 1 }
+      ],
+      "outputs": [
+        { "type": "YewLongbow", "amount": 1 }
+      ]
+    },
+    {
+      "recipeName": "Bronze Bar",
+      "description": "Smelt copper and tin ores together in a furnace to produce a bronze bar.",
+      "requiredSkill": "Smithing",
+      "requiredLevel": 1,
+      "xpReward": 6,
+      "stationType": "Furnace",
+      "craftTimeSeconds": 3.0,
+      "ingredients": [
+        { "type": "CopperOre", "amount": 1 },
+        { "type": "TinOre",    "amount": 1 }
+      ],
+      "outputs": [
+        { "type": "BronzeBar", "amount": 1 }
+      ]
+    },
+    {
+      "recipeName": "Iron Bar",
+      "description": "Smelt iron ore in a furnace. Requires level 15 Smithing.",
+      "requiredSkill": "Smithing",
+      "requiredLevel": 15,
+      "xpReward": 12,
+      "stationType": "Furnace",
+      "craftTimeSeconds": 3.0,
+      "ingredients": [
+        { "type": "Iron", "amount": 1 }
+      ],
+      "outputs": [
+        { "type": "IronBar", "amount": 1 }
+      ]
+    },
+    {
+      "recipeName": "Steel Bar",
+      "description": "Smelt iron and coal together to produce a steel bar. Requires level 30 Smithing.",
+      "requiredSkill": "Smithing",
+      "requiredLevel": 30,
+      "xpReward": 17,
+      "stationType": "Furnace",
+      "craftTimeSeconds": 3.0,
+      "ingredients": [
+        { "type": "Iron",    "amount": 1 },
+        { "type": "CoalOre", "amount": 2 }
+      ],
+      "outputs": [
+        { "type": "SteelBar", "amount": 1 }
+      ]
+    },
+    {
+      "recipeName": "Bronze Sword",
+      "description": "Forge a sturdy bronze sword at the anvil. Requires level 4 Smithing.",
+      "requiredSkill": "Smithing",
+      "requiredLevel": 4,
+      "xpReward": 12,
+      "stationType": "Anvil",
+      "craftTimeSeconds": 2.5,
+      "ingredients": [
+        { "type": "BronzeBar", "amount": 1 }
+      ],
+      "outputs": [
+        { "type": "BronzeSword", "amount": 1 }
+      ]
+    },
+    {
+      "recipeName": "Iron Platebody",
+      "description": "Hammer five iron bars into a full platebody. Requires level 33 Smithing.",
+      "requiredSkill": "Smithing",
+      "requiredLevel": 33,
+      "xpReward": 125,
+      "stationType": "Anvil",
+      "craftTimeSeconds": 5.0,
+      "ingredients": [
+        { "type": "IronBar", "amount": 5 }
+      ],
+      "outputs": [
+        { "type": "IronPlatebody", "amount": 1 }
+      ]
+    },
+    {
+      "recipeName": "Cooked Fish",
+      "description": "Cook raw food over a cooking range. Even novice adventurers can manage this.",
+      "requiredSkill": "Cooking",
+      "requiredLevel": 1,
+      "xpReward": 30,
+      "stationType": "CookingRange",
+      "craftTimeSeconds": 2.0,
+      "ingredients": [
+        { "type": "Food", "amount": 1 }
+      ],
+      "outputs": [
+        { "type": "CookedFish", "amount": 1 }
+      ]
+    }
+  ]
+}

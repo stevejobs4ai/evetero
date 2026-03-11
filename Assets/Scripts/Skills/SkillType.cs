@@ -12,6 +12,7 @@ namespace Evetero
         Smithing,
         Cooking,
         Crafting,
-        Farming
+        Farming,
+        Fletching
     }
 }
