@@ -148,6 +148,18 @@ namespace Evetero
                 });
             }
 
+            // Wallet balances
+            if (PlayerWallet.Instance != null)
+            {
+                var allBalances = PlayerWallet.Instance.GetAllBalances();
+                foreach (var kvp in allBalances)
+                    data.walletBalances.Add(new SaveData.ResourceEntry
+                    {
+                        key   = kvp.Key.ToString(),
+                        value = kvp.Value
+                    });
+            }
+
             File.WriteAllText(SaveFilePath, JsonUtility.ToJson(data, prettyPrint: true));
         }
 
@@ -187,6 +199,19 @@ namespace Evetero
             {
                 if (heroXPDict.TryGetValue(hero.gameObject.name, out var xp))
                     hero.LoadXP(xp);
+            }
+
+            // Restore wallet balances
+            if (PlayerWallet.Instance != null)
+            {
+                var walletDict = data.GetWalletDict();
+                var balances   = new Dictionary<CurrencyType, int>();
+                foreach (var kvp in walletDict)
+                {
+                    if (Enum.TryParse<CurrencyType>(kvp.Key, out var ct))
+                        balances[ct] = kvp.Value;
+                }
+                PlayerWallet.Instance.LoadBalances(balances);
             }
         }
     }

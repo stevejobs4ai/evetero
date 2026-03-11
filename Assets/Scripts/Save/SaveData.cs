@@ -28,8 +28,9 @@ namespace Evetero
 
         // ── Fields ─────────────────────────────────────────────────────────────
 
-        public List<ResourceEntry> resources = new List<ResourceEntry>();
-        public List<HeroXPEntry>   heroXP    = new List<HeroXPEntry>();
+        public List<ResourceEntry> resources      = new List<ResourceEntry>();
+        public List<HeroXPEntry>   heroXP         = new List<HeroXPEntry>();
+        public List<ResourceEntry> walletBalances = new List<ResourceEntry>();
         public string              sceneName;
         public string              timestamp;
 
@@ -48,6 +49,14 @@ namespace Evetero
             var dict = new Dictionary<string, int[]>(heroXP.Count);
             foreach (var e in heroXP)
                 dict[e.heroName] = e.xp;
+            return dict;
+        }
+
+        public Dictionary<string, int> GetWalletDict()
+        {
+            var dict = new Dictionary<string, int>(walletBalances.Count);
+            foreach (var e in walletBalances)
+                dict[e.key] = e.value;
             return dict;
         }
     }
