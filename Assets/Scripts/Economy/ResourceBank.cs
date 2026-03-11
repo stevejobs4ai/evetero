@@ -34,6 +34,9 @@ namespace Evetero
         /// <summary>Fired after a successful deposit; carries the new total for that resource.</summary>
         public event Action<ResourceType, int> OnResourceDeposited;
 
+        /// <summary>Fired after any deposit or spend; carries the new total for that resource.</summary>
+        public event Action<ResourceType, int> OnResourceChanged;
+
         // ── Storage ───────────────────────────────────────────────────────────
 
         private readonly Dictionary<ResourceType, int> _resources = new();
@@ -50,6 +53,7 @@ namespace Evetero
             _resources[type] = newTotal;
 
             OnResourceDeposited?.Invoke(type, newTotal);
+            OnResourceChanged?.Invoke(type, newTotal);
         }
 
         /// <summary>Current stored amount of <paramref name="type"/>.</summary>
@@ -71,6 +75,7 @@ namespace Evetero
             if (current < amount) return false;
 
             _resources[type] = current - amount;
+            OnResourceChanged?.Invoke(type, _resources[type]);
             return true;
         }
 

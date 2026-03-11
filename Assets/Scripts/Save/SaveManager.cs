@@ -4,6 +4,7 @@
 // Auto-saves on ResourceBank.OnResourceDeposited and HeroSkills.OnLevelUp.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -47,13 +48,27 @@ namespace Evetero
 
         private readonly HashSet<HeroSkills> _registeredHeroes = new HashSet<HeroSkills>();
         private bool _subscribedToBank;
+        private bool _subscribedToWallet;
 
         // ── Unity lifecycle ───────────────────────────────────────────────────
 
         private void Start()
         {
             SubscribeToBank();
+            SubscribeToWallet();
             FindAndRegisterHeroSkills();
+            Load();
+            StartCoroutine(PeriodicAutoSave());
+        }
+
+        private IEnumerator PeriodicAutoSave()
+        {
+            var wait = new WaitForSeconds(60f);
+            while (true)
+            {
+                yield return wait;
+                Save();
+            }
         }
 
         // ── Auto-save subscriptions ───────────────────────────────────────────
@@ -63,17 +78,29 @@ namespace Evetero
             if (_subscribedToBank) return;
             if (ResourceBank.Instance == null) return;
 
-            ResourceBank.Instance.OnResourceDeposited += OnResourceDeposited;
+            ResourceBank.Instance.OnResourceChanged += OnResourceChanged;
             _subscribedToBank = true;
         }
 
-        private void OnResourceDeposited(ResourceType _, int __) => Save();
+        private void OnResourceChanged(ResourceType _, int __) => Save();
+
+        private void SubscribeToWallet()
+        {
+            if (_subscribedToWallet) return;
+            if (PlayerWallet.Instance == null) return;
+
+            PlayerWallet.Instance.OnBalanceChanged += OnWalletBalanceChanged;
+            _subscribedToWallet = true;
+        }
+
+        private void OnWalletBalanceChanged(CurrencyType _, int __) => Save();
 
         /// <summary>Find all HeroSkills in the active scene and wire up OnLevelUp auto-save.</summary>
         public void FindAndRegisterHeroSkills()
         {
-            // Also try subscribing to the bank in case it wasn't ready in Start.
+            // Also try subscribing to bank/wallet in case they weren't ready in Start.
             SubscribeToBank();
+            SubscribeToWallet();
 
             var heroes = FindObjectsByType<HeroSkills>(FindObjectsSortMode.None);
             foreach (var hero in heroes)
@@ -89,8 +116,12 @@ namespace Evetero
         private void UnsubscribeAll()
         {
             if (_subscribedToBank && ResourceBank.Instance != null)
-                ResourceBank.Instance.OnResourceDeposited -= OnResourceDeposited;
+                ResourceBank.Instance.OnResourceChanged -= OnResourceChanged;
             _subscribedToBank = false;
+
+            if (_subscribedToWallet && PlayerWallet.Instance != null)
+                PlayerWallet.Instance.OnBalanceChanged -= OnWalletBalanceChanged;
+            _subscribedToWallet = false;
 
             foreach (var hero in _registeredHeroes)
             {
