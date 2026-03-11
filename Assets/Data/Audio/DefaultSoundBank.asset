@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 #11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa00000100000000000000000000002, type: 3}
+  m_Name: DefaultSoundBank
+  m_EditorClassIdentifier:
+  entries:
+  - id: button_click
+    clip: {fileID: 0}
+    volume: 1
+    pitchMin: 0.95
+    pitchMax: 1.05
+    category: 0
+  - id: panel_open
+    clip: {fileID: 0}
+    volume: 0.8
+    pitchMin: 1
+    pitchMax: 1
+    category: 0
+  - id: panel_close
+    clip: {fileID: 0}
+    volume: 0.8
+    pitchMin: 0.9
+    pitchMax: 0.9
+    category: 0
+  - id: coin_collect
+    clip: {fileID: 0}
+    volume: 0.9
+    pitchMin: 1
+    pitchMax: 1.2
+    category: 1
+  - id: level_up
+    clip: {fileID: 0}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    category: 1
+  - id: gather_wood
+    clip: {fileID: 0}
+    volume: 0.85
+    pitchMin: 0.9
+    pitchMax: 1.1
+    category: 1
+  - id: gather_stone
+    clip: {fileID: 0}
+    volume: 0.9
+    pitchMin: 0.85
+    pitchMax: 1
+    category: 1
+  - id: combat_hit
+    clip: {fileID: 0}
+    volume: 1
+    pitchMin: 0.8
+    pitchMax: 1.2
+    category: 1
+  - id: combat_miss
+    clip: {fileID: 0}
+    volume: 0.7
+    pitchMin: 1
+    pitchMax: 1
+    category: 1
+  - id: ambient_forest
+    clip: {fileID: 0}
+    volume: 0.6
+    pitchMin: 1
+    pitchMax: 1
+    category: 2
+  - id: ambient_village
+    clip: {fileID: 0}
+    volume: 0.5
+    pitchMin: 1
+    pitchMax: 1
+    category: 2
+  - id: ambient_dungeon
+    clip: {fileID: 0}
+    volume: 0.55
+    pitchMin: 1
+    pitchMax: 1
+    category: 2
+  - id: music_main_theme
+    clip: {fileID: 0}
+    volume: 0.8
+    pitchMin: 1
+    pitchMax: 1
+    category: 3
+  - id: music_battle
+    clip: {fileID: 0}
+    volume: 0.85
+    pitchMin: 1
+    pitchMax: 1
+    category: 3
