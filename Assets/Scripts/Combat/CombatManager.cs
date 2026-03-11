@@ -9,9 +9,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
+#pragma warning disable CS0618 // CombatManager is intentionally marked obsolete
 
 namespace Evetero
 {
+    [Obsolete("CombatManager drives the old real-time system. Use BattleManager for the turn-based battle scene.")]
     public class CombatManager : MonoBehaviour
     {
         // ── Singleton ─────────────────────────────────────────────────────────
