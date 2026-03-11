@@ -17,17 +17,17 @@ MonoBehaviour:
     Dry wit, guarded warmth, and a bow she never misses.
   portrait: {fileID: 0}
   fullArt: {fileID: 0}
-  combatType: 1
+  combatType: 2
   abilities:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6, type: 2}
+  - {fileID: 11400000, guid: b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7, type: 2}
+  - {fileID: 11400000, guid: c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8, type: 2}
+  - {fileID: 11400000, guid: d4e5f6a7b8c9d0e1f2a3b4c5d6e7f809, type: 2}
   baseStats:
     maxHP: 80
     attack: 12
-    magicPower: 0
+    magicPower: 85
     defense: 5
-    magicDefense: 0
+    magicDefense: 30
     speed: 3
     critChance: 0

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160f2bfeb0c354afbacfa47fe96dc7b3, type: 3}
+  m_Name: GuardianStand
+  m_EditorClassIdentifier:
+  abilityName: "Guardian\u2019s Stand"
+  description: "She drives her shield into the ground. The land holds them up. Nobody
+    falls while she\u2019s standing."
+  abilityType: 2
+  targetType: 3
+  damageFormula:
+  cooldownTurns: 5
+  manaCost: 20
+  icon: {fileID: 0}
+  vfxPrefab: {fileID: 0}
+  sfx: {fileID: 0}
