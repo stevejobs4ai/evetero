@@ -21,6 +21,8 @@ namespace Evetero
         [Header("UI")]
         [Tooltip("The HeroStatusPanel to update when a hero is selected.")]
         [SerializeField] private HeroStatusPanel heroStatusPanel;
+        [Tooltip("The SkillLevelsPanel to update when a hero is selected.")]
+        [SerializeField] private SkillLevelsPanel skillLevelsPanel;
 
         /// <summary>Fired whenever a new hero is selected (or null to deselect).</summary>
         public event Action<HeroController> OnHeroSelected;
@@ -45,6 +47,9 @@ namespace Evetero
 
             if (heroStatusPanel != null)
                 heroStatusPanel.SelectHero(hero);
+
+            if (skillLevelsPanel != null)
+                skillLevelsPanel.SelectHero(hero);
 
             OnHeroSelected?.Invoke(hero);
         }
