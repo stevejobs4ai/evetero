@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fafa57c504fb47479afddd61da85a37, type: 3}
+  m_Name: Dialogue_MiraIntro
+  m_EditorClassIdentifier:
+  sceneLabel: Mira -- Tutorial Intro
+  lines:
+  - speakerName: Narrator
+    speakerPortrait: {fileID: 0}
+    lineText: They said nothing could grow here anymore. They have never met you.
+    autoAdvanceDelay: 0
+  - speakerName: Mira
+    speakerPortrait: {fileID: 0}
+    lineText: My name is Mira. I have been here since the Collapse. There is a lot
+      to explain -- but first, we need resources, and the daylight does not wait.
+    autoAdvanceDelay: 0
+  - speakerName: Mira
+    speakerPortrait: {fileID: 0}
+    lineText: "See? The land still gives, if you know how to ask. Come on -- there
+      is more to do."
+    autoAdvanceDelay: 0
+  - speakerName: Mira
+    speakerPortrait: {fileID: 0}
+    lineText: Wait. Something moved. Hand on your weapon.
+    autoAdvanceDelay: 0

@@ -73,5 +73,19 @@ namespace Evetero
             _resources[type] = current - amount;
             return true;
         }
+
+        // ── Serialization helpers ─────────────────────────────────────────────
+
+        /// <summary>Returns a copy of all stored resource amounts.</summary>
+        public Dictionary<ResourceType, int> GetAllResources() =>
+            new Dictionary<ResourceType, int>(_resources);
+
+        /// <summary>Replace the internal resource state with <paramref name="data"/>.</summary>
+        public void LoadResources(Dictionary<ResourceType, int> data)
+        {
+            _resources.Clear();
+            foreach (var kvp in data)
+                _resources[kvp.Key] = kvp.Value;
+        }
     }
 }

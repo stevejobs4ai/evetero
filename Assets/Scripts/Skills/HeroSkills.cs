@@ -67,5 +67,18 @@ namespace Evetero
                     OnBreakthrough?.Invoke(skill, newLevel);
             }
         }
+
+        // ── Serialization helpers ─────────────────────────────────────────────
+
+        /// <summary>Returns a copy of the full XP array (indexed by SkillType).</summary>
+        public int[] GetAllXP() => (int[])_skillXP.Clone();
+
+        /// <summary>Replace the full XP array. Clamps to current SkillCount length.</summary>
+        public void LoadXP(int[] data)
+        {
+            if (data == null) return;
+            int len = Mathf.Min(data.Length, _skillXP.Length);
+            System.Array.Copy(data, _skillXP, len);
+        }
     }
 }
