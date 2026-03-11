@@ -15,41 +15,6 @@ using UnityEngine;
 
 namespace Evetero
 {
-    // ── Stub: replace with your real HeroController ───────────────────────────
-
-    /// <summary>
-    /// Minimal stub so AbilitySystem compiles standalone.
-    /// Replace with your full HeroController once the combat scene exists.
-    /// </summary>
-    public class HeroController : MonoBehaviour
-    {
-        public HeroData data;          // the hero's ScriptableObject
-        public int currentHP;
-        public int currentMana;
-        public int[] abilityCooldowns; // one entry per ability slot
-
-        private void Awake()
-        {
-            if (data == null) return;
-            currentHP   = data.baseStats.maxHP;
-            currentMana = 100; // placeholder mana pool
-            abilityCooldowns = new int[data.abilities.Length];
-        }
-
-        public void TakeDamage(int amount)
-        {
-            currentHP = Mathf.Max(0, currentHP - amount);
-            Debug.Log($"[HeroController] {data.heroName} takes {amount} damage → {currentHP} HP");
-        }
-
-        public void RestoreHP(int amount)
-        {
-            currentHP = Mathf.Min(data.baseStats.maxHP, currentHP + amount);
-            Debug.Log($"[HeroController] {data.heroName} restores {amount} HP → {currentHP} HP");
-        }
-
-        public bool IsAlive => currentHP > 0;
-    }
 
     // ── AbilityResult ────────────────────────────────────────────────────────
 

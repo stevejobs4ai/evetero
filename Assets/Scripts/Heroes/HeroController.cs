@@ -21,9 +21,32 @@ namespace Evetero
         [Header("Data")]
         public HeroData heroData;
 
+        // Alias for AbilitySystem compatibility
+        public HeroData data => heroData;
+
         [Header("Movement")]
         [Tooltip("Units per second when lerp-moving to a target.")]
         public float moveSpeed = 5f;
+
+        // ── Combat state ──────────────────────────────────────────────────────
+
+        public int currentHP;
+        public int currentMana;
+        public int[] abilityCooldowns;
+
+        public bool IsAlive => currentHP > 0;
+
+        public void TakeDamage(int amount)
+        {
+            currentHP = Mathf.Max(0, currentHP - amount);
+            Debug.Log($"[HeroController] {heroData?.heroName} takes {amount} dmg → {currentHP} HP");
+        }
+
+        public void RestoreHP(int amount)
+        {
+            if (heroData == null) return;
+            currentHP = Mathf.Min(heroData.baseStats.maxHP, currentHP + amount);
+        }
 
         // ── State ─────────────────────────────────────────────────────────────
 
@@ -36,6 +59,16 @@ namespace Evetero
 
         /// <summary>The node being gathered from (null when not gathering).</summary>
         public WorldNodeData GatheringNode => _gatheringNode;
+
+        // ── Unity lifecycle ───────────────────────────────────────────────────
+
+        private void Awake()
+        {
+            if (heroData == null) return;
+            currentHP        = heroData.baseStats.maxHP;
+            currentMana      = 100;
+            abilityCooldowns = new int[heroData.abilities != null ? heroData.abilities.Length : 4];
+        }
 
         // ── Public API ────────────────────────────────────────────────────────
 
