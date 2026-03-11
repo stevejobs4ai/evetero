@@ -9,6 +9,10 @@
 //   3. Assign a SkillProgressBar prefab to skillRowPrefab.
 //      The prefab should contain: skillNameText (TMP), levelText (TMP),
 //      xpText (TMP), and a Slider for the XP bar.
+//
+// Hero selection:
+//   Call SelectHero(heroController) at runtime to switch which hero is displayed.
+//   The panel re-populates skill rows and refreshes immediately.
 
 using System;
 using System.Collections.Generic;
@@ -19,6 +23,8 @@ namespace Evetero
 {
     public class HeroStatusPanel : MonoBehaviour
     {
+        [Header("Hero")]
+        [Tooltip("Initial hero to display. Leave blank to auto-find, or call SelectHero() at runtime.")]
         [SerializeField] private HeroController hero;
 
         [Header("Active-Skill Labels")]
@@ -34,8 +40,8 @@ namespace Evetero
         [Tooltip("Prefab containing a SkillProgressBar component (name, level, XP bar).")]
         [SerializeField] private SkillProgressBar skillRowPrefab;
 
-        private HeroSkills          _heroSkills;
-        private GatheringAction     _gatheringAction;
+        private HeroSkills             _heroSkills;
+        private GatheringAction        _gatheringAction;
         private List<SkillProgressBar> _skillBars = new List<SkillProgressBar>();
 
         private void Start()
@@ -43,14 +49,32 @@ namespace Evetero
             if (hero == null)
                 hero = FindObjectOfType<HeroController>();
 
-            if (hero != null)
-            {
-                _heroSkills      = hero.GetComponent<HeroSkills>();
-                _gatheringAction = hero.GetComponent<GatheringAction>();
-            }
+            BindHero(hero);
+            InvokeRepeating(nameof(Refresh), 0f, 0.5f);
+        }
+
+        // ── Public API ───────────────────────────────────────────────────────────
+
+        /// <summary>
+        /// Switch the panel to display <paramref name="newHero"/>.
+        /// Rebuilds skill rows and refreshes all labels immediately.
+        /// Pass null to clear the panel.
+        /// </summary>
+        public void SelectHero(HeroController newHero)
+        {
+            BindHero(newHero);
+            Refresh();
+        }
+
+        // ── Hero binding ─────────────────────────────────────────────────────────
+
+        private void BindHero(HeroController newHero)
+        {
+            hero             = newHero;
+            _heroSkills      = newHero != null ? newHero.GetComponent<HeroSkills>()      : null;
+            _gatheringAction = newHero != null ? newHero.GetComponent<GatheringAction>() : null;
 
             PopulateSkillRows();
-            InvokeRepeating(nameof(Refresh), 0f, 0.5f);
         }
 
         // ── Skills list ──────────────────────────────────────────────────────────
@@ -59,7 +83,7 @@ namespace Evetero
         {
             if (skillRowPrefab == null || skillsContainer == null) return;
 
-            // Clear any rows that were added in the editor during iteration.
+            // Clear any existing rows before (re-)building.
             foreach (var bar in _skillBars)
                 if (bar != null) Destroy(bar.gameObject);
             _skillBars.Clear();
