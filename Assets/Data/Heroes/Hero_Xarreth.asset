@@ -17,7 +17,7 @@ MonoBehaviour:
     own moral calculus — and he has never once explained it to anyone.
   portrait: {fileID: 0}
   fullArt: {fileID: 0}
-  combatType: 7
+  combatType: 2
   abilities:
   - {fileID: 0}
   - {fileID: 0}

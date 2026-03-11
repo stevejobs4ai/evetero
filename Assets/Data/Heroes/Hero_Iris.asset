@@ -17,7 +17,7 @@ MonoBehaviour:
     without mercy when those she loves are threatened. Light bends to her will.
   portrait: {fileID: 0}
   fullArt: {fileID: 0}
-  combatType: 3
+  combatType: 2
   abilities:
   - {fileID: 0}
   - {fileID: 0}

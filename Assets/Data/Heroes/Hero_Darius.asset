@@ -17,7 +17,7 @@ MonoBehaviour:
     Darius fights dirty and wins clean. He always knows three exits from any room.
   portrait: {fileID: 0}
   fullArt: {fileID: 0}
-  combatType: 4
+  combatType: 0
   abilities:
   - {fileID: 0}
   - {fileID: 0}
