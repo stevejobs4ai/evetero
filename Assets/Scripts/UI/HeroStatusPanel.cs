@@ -1,7 +1,17 @@
 // HeroStatusPanel.cs
-// Canvas overlay MonoBehaviour that shows hero name, HP, and active skill info.
+// Canvas overlay MonoBehaviour that shows hero name, HP, active skill info,
+// and a scrollable list of all skill levels with XP progress bars.
 // Refreshes every 0.5s via InvokeRepeating. Wire fields in the Inspector.
+//
+// Skills List setup:
+//   1. Add a ScrollRect to this panel (or a child).
+//   2. Set skillsContainer to the ScrollRect's Content RectTransform.
+//   3. Assign a SkillProgressBar prefab to skillRowPrefab.
+//      The prefab should contain: skillNameText (TMP), levelText (TMP),
+//      xpText (TMP), and a Slider for the XP bar.
 
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -11,15 +21,22 @@ namespace Evetero
     {
         [SerializeField] private HeroController hero;
 
-        [Header("Labels")]
+        [Header("Active-Skill Labels")]
         [SerializeField] private TMP_Text heroNameText;
         [SerializeField] private TMP_Text hpText;
         [SerializeField] private TMP_Text skillNameText;
         [SerializeField] private TMP_Text skillXPText;
         [SerializeField] private TMP_Text skillLevelText;
 
-        private HeroSkills      _heroSkills;
-        private GatheringAction _gatheringAction;
+        [Header("Skills List")]
+        [Tooltip("Content RectTransform of the ScrollRect that holds skill rows.")]
+        [SerializeField] private Transform skillsContainer;
+        [Tooltip("Prefab containing a SkillProgressBar component (name, level, XP bar).")]
+        [SerializeField] private SkillProgressBar skillRowPrefab;
+
+        private HeroSkills          _heroSkills;
+        private GatheringAction     _gatheringAction;
+        private List<SkillProgressBar> _skillBars = new List<SkillProgressBar>();
 
         private void Start()
         {
@@ -32,13 +49,43 @@ namespace Evetero
                 _gatheringAction = hero.GetComponent<GatheringAction>();
             }
 
+            PopulateSkillRows();
             InvokeRepeating(nameof(Refresh), 0f, 0.5f);
         }
+
+        // ── Skills list ──────────────────────────────────────────────────────────
+
+        private void PopulateSkillRows()
+        {
+            if (skillRowPrefab == null || skillsContainer == null) return;
+
+            // Clear any rows that were added in the editor during iteration.
+            foreach (var bar in _skillBars)
+                if (bar != null) Destroy(bar.gameObject);
+            _skillBars.Clear();
+
+            foreach (SkillType skill in Enum.GetValues(typeof(SkillType)))
+            {
+                SkillProgressBar row = Instantiate(skillRowPrefab, skillsContainer);
+                row.name = $"SkillRow_{skill}";
+                row.Bind(skill, _heroSkills);
+                _skillBars.Add(row);
+            }
+        }
+
+        // ── Periodic refresh ─────────────────────────────────────────────────────
 
         private void Refresh()
         {
             if (hero == null) return;
 
+            RefreshHeader();
+            RefreshActiveSkillLabels();
+            RefreshSkillBars();
+        }
+
+        private void RefreshHeader()
+        {
             if (heroNameText != null)
                 heroNameText.text = hero.heroData != null ? hero.heroData.heroName : "Hero";
 
@@ -47,7 +94,10 @@ namespace Evetero
                 int maxHP = hero.heroData != null ? hero.heroData.baseStats.maxHP : 0;
                 hpText.text = $"HP: {hero.currentHP} / {maxHP}";
             }
+        }
 
+        private void RefreshActiveSkillLabels()
+        {
             SkillType activeSkill = GetActiveSkill();
 
             if (skillNameText != null)
@@ -62,6 +112,14 @@ namespace Evetero
                     skillLevelText.text = $"Lv: {_heroSkills.GetLevel(activeSkill)}";
             }
         }
+
+        private void RefreshSkillBars()
+        {
+            foreach (var bar in _skillBars)
+                bar.Refresh();
+        }
+
+        // ── Helpers ──────────────────────────────────────────────────────────────
 
         private SkillType GetActiveSkill()
         {
