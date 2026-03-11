@@ -21,8 +21,9 @@ namespace Evetero
         public float gatherIntervalSeconds = 3f;
 
         [Header("Runtime (set by StartGathering)")]
-        public HeroSkills    heroSkills;
-        public WorldNodeData targetNode;
+        public HeroSkills           heroSkills;
+        public WorldNodeData        targetNode;
+        public WorldNodeInteractable targetNodeInteractable;
 
         // ── Events ────────────────────────────────────────────────────────────
 
@@ -39,12 +40,14 @@ namespace Evetero
         // ── Public API ────────────────────────────────────────────────────────
 
         /// <summary>Begin gathering from <paramref name="node"/> using <paramref name="skills"/> for XP.</summary>
-        public void StartGathering(WorldNodeData node, HeroSkills skills)
+        public void StartGathering(WorldNodeData node, HeroSkills skills,
+                                   WorldNodeInteractable nodeInteractable = null)
         {
             StopGathering();
-            targetNode = node;
-            heroSkills = skills;
-            _gatherCoroutine = StartCoroutine(GatherLoop());
+            targetNode             = node;
+            heroSkills             = skills;
+            targetNodeInteractable = nodeInteractable;
+            _gatherCoroutine       = StartCoroutine(GatherLoop());
         }
 
         /// <summary>Stop the gather coroutine immediately.</summary>
@@ -67,13 +70,22 @@ namespace Evetero
 
                 if (targetNode == null) break;
 
+                // Stop if the node has become depleted (e.g. another hero exhausted it)
+                if (targetNodeInteractable != null && targetNodeInteractable.IsDepleted) break;
+
                 // Award 1 resource unit
                 OnResourceGathered?.Invoke(targetNode.resourceType, 1);
+
+                // Register the gather with the node (may trigger depletion)
+                targetNodeInteractable?.RegisterGather();
 
                 // Award skill XP
                 SkillType skill = ResourceToSkill(targetNode.resourceType);
                 int       xp    = XPForResource(targetNode.resourceType);
                 heroSkills?.GainXP(skill, xp);
+
+                // If the gather just depleted the node, stop looping
+                if (targetNodeInteractable != null && targetNodeInteractable.IsDepleted) break;
             }
 
             _gatherCoroutine = null;

@@ -77,6 +77,15 @@ namespace Evetero
         [Min(0)]
         public int storageCapacity;
 
+        [Header("Depletion & Respawn")]
+        [Tooltip("Number of gather actions before this node is depleted. 0 = infinite uses.")]
+        [Min(0)]
+        public int maxUses = 5;
+
+        [Tooltip("Seconds before a depleted node respawns and becomes gatherable again. 0 = never respawns.")]
+        [Min(0)]
+        public float respawnSeconds = 60f;
+
         [Header("Encounter (Dungeons / Hostile Nodes)")]
         [Tooltip("Minimum player level recommended to attempt this node.")]
         [Min(1)]
