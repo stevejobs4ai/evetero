@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fafa57c504fb47479afddd61da85a37, type: 3}
+  m_Name: MiraIntro
+  m_EditorClassIdentifier:
+  sceneLabel: Mira - Ember Village Intro
+  lines:
+  - speakerName: Narrator
+    speakerPortrait: {fileID: 0}
+    lineText: The village of Ember lies in ruin. Three days since the raid. Mira is
+      the only one left.
+    autoAdvanceDelay: 0
+  - speakerName: Mira
+    speakerPortrait: {fileID: 0}
+    lineText: Im not leaving. Not until Ive rebuilt what they took.
+    autoAdvanceDelay: 0
+  - speakerName: Mira
+    speakerPortrait: {fileID: 0}
+    lineText: The ironwood trees still stand. Start there.
+    autoAdvanceDelay: 0
