@@ -497,6 +497,17 @@ namespace Evetero
             tmp.fontStyle = style;
             tmp.alignment = align;
             tmp.color     = Color.white;
+
+            // Assign default TMP font if none was set (prevents "No Font Asset" error)
+            if (tmp.font == null)
+            {
+                var defaultFont = Resources.Load<TMP_FontAsset>("Fonts & Materials/LiberationSans SDF");
+                if (defaultFont == null)
+                    defaultFont = TMP_Settings.defaultFontAsset;
+                if (defaultFont != null)
+                    tmp.font = defaultFont;
+            }
+
             return tmp;
         }
 

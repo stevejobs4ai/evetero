@@ -94,15 +94,20 @@ namespace Evetero
                 currentMana      = 100;
                 abilityCooldowns = new int[heroData.abilities != null ? heroData.abilities.Length : 4];
             }
+        }
 
+        private void Start()
+        {
+            // Deferred NavMeshAgent init — runs after NavMeshFloor.Awake() builds
+            // the runtime NavMesh. Prevents "Failed to create agent" errors.
             _agent = GetComponent<NavMeshAgent>();
             if (_agent != null)
             {
-                _agent.speed          = moveSpeed;
+                _agent.speed           = moveSpeed;
                 _agent.stoppingDistance = ArrivalThreshold * 0.5f;
                 // 2D: prevent the agent from rotating the sprite or adjusting Z.
-                _agent.updateRotation = false;
-                _agent.updateUpAxis   = false;
+                _agent.updateRotation  = false;
+                _agent.updateUpAxis    = false;
             }
         }
 
