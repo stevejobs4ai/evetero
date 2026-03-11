@@ -1,0 +1,187 @@
+{
+    "levelName": "Ember Village",
+    "levelId": "ember_village",
+    "sceneName": "EmberVillageScene",
+    "entities": [
+        {
+            "id": "spawn_mira",
+            "prefabPath": "",
+            "entityType": "SpawnPoint",
+            "position": { "x": -4.0, "y": -1.5, "z": 0.0 },
+            "rotation": { "x": 0.0,  "y": 0.0,  "z": 0.0 },
+            "scale":    { "x": 1.0,  "y": 1.0,  "z": 1.0 },
+            "metadata": [
+                { "key": "heroId",    "value": "Mira" },
+                { "key": "heroIndex", "value": "0" }
+            ]
+        },
+        {
+            "id": "spawn_aldric",
+            "prefabPath": "",
+            "entityType": "SpawnPoint",
+            "position": { "x": -5.5, "y": -1.5, "z": 0.0 },
+            "rotation": { "x": 0.0,  "y": 0.0,  "z": 0.0 },
+            "scale":    { "x": 1.0,  "y": 1.0,  "z": 1.0 },
+            "metadata": [
+                { "key": "heroId",    "value": "Aldric" },
+                { "key": "heroIndex", "value": "1" }
+            ]
+        },
+        {
+            "id": "oak_grove_north",
+            "prefabPath": "Prefabs/World/Nodes/WoodcuttingNode",
+            "entityType": "WorldNode",
+            "position": { "x": 2.0,  "y": 1.5,  "z": 0.0 },
+            "rotation": { "x": 0.0,  "y": 0.0,  "z": 0.0 },
+            "scale":    { "x": 1.0,  "y": 1.0,  "z": 1.0 },
+            "metadata": [
+                { "key": "nodeName",         "value": "Oak Grove" },
+                { "key": "description",      "value": "Young oaks cluster near the village well. Good timber for fletching." },
+                { "key": "nodeType",         "value": "ResourceNode" },
+                { "key": "resourceType",     "value": "OakLog" },
+                { "key": "yieldPerHour",     "value": "30" },
+                { "key": "storageCapacity",  "value": "150" },
+                { "key": "maxUses",          "value": "8" },
+                { "key": "respawnSeconds",   "value": "90" },
+                { "key": "recommendedLevel", "value": "1" },
+                { "key": "difficulty",       "value": "1" }
+            ]
+        },
+        {
+            "id": "stone_quarry",
+            "prefabPath": "Prefabs/World/Nodes/MiningNode",
+            "entityType": "WorldNode",
+            "position": { "x": 4.5,  "y": 0.5,  "z": 0.0 },
+            "rotation": { "x": 0.0,  "y": 0.0,  "z": 0.0 },
+            "scale":    { "x": 1.0,  "y": 1.0,  "z": 1.0 },
+            "metadata": [
+                { "key": "nodeName",         "value": "Stone Quarry" },
+                { "key": "description",      "value": "Exposed rock face on the eastern ridge." },
+                { "key": "nodeType",         "value": "ResourceNode" },
+                { "key": "resourceType",     "value": "Stone" },
+                { "key": "yieldPerHour",     "value": "20" },
+                { "key": "storageCapacity",  "value": "200" },
+                { "key": "maxUses",          "value": "6" },
+                { "key": "respawnSeconds",   "value": "120" },
+                { "key": "recommendedLevel", "value": "1" },
+                { "key": "difficulty",       "value": "1" }
+            ]
+        },
+        {
+            "id": "copper_vein",
+            "prefabPath": "Prefabs/World/Nodes/MiningNode",
+            "entityType": "WorldNode",
+            "position": { "x": 5.5,  "y": -0.5, "z": 0.0 },
+            "rotation": { "x": 0.0,  "y": 0.0,  "z": 0.0 },
+            "scale":    { "x": 1.0,  "y": 1.0,  "z": 1.0 },
+            "metadata": [
+                { "key": "nodeName",         "value": "Copper Vein" },
+                { "key": "description",      "value": "A thin ore seam. Yields CopperOre for early smithing." },
+                { "key": "nodeType",         "value": "ResourceNode" },
+                { "key": "resourceType",     "value": "CopperOre" },
+                { "key": "yieldPerHour",     "value": "15" },
+                { "key": "storageCapacity",  "value": "100" },
+                { "key": "maxUses",          "value": "5" },
+                { "key": "respawnSeconds",   "value": "180" },
+                { "key": "recommendedLevel", "value": "1" },
+                { "key": "difficulty",       "value": "1" }
+            ]
+        },
+        {
+            "id": "fishing_spot",
+            "prefabPath": "Prefabs/World/Nodes/FishingNode",
+            "entityType": "WorldNode",
+            "position": { "x": -2.0, "y": -3.0, "z": 0.0 },
+            "rotation": { "x": 0.0,  "y": 0.0,  "z": 0.0 },
+            "scale":    { "x": 1.0,  "y": 1.0,  "z": 1.0 },
+            "metadata": [
+                { "key": "nodeName",         "value": "Ember Creek" },
+                { "key": "description",      "value": "A shallow creek where flatfish are easy to catch." },
+                { "key": "nodeType",         "value": "ResourceNode" },
+                { "key": "resourceType",     "value": "Food" },
+                { "key": "yieldPerHour",     "value": "25" },
+                { "key": "storageCapacity",  "value": "120" },
+                { "key": "maxUses",          "value": "10" },
+                { "key": "respawnSeconds",   "value": "60" },
+                { "key": "recommendedLevel", "value": "1" },
+                { "key": "difficulty",       "value": "1" }
+            ]
+        },
+        {
+            "id": "ember_tavern",
+            "prefabPath": "Prefabs/World/Buildings/Tavern",
+            "entityType": "Building",
+            "position": { "x": 0.0,  "y": 0.5,  "z": 0.0 },
+            "rotation": { "x": 0.0,  "y": 0.0,  "z": 0.0 },
+            "scale":    { "x": 1.5,  "y": 1.5,  "z": 1.0 },
+            "metadata": [
+                { "key": "buildingName", "value": "Ember Tavern" },
+                { "key": "interactable", "value": "true" },
+                { "key": "shopType",     "value": "Inn" }
+            ]
+        },
+        {
+            "id": "blacksmith",
+            "prefabPath": "Prefabs/World/Buildings/Blacksmith",
+            "entityType": "Building",
+            "position": { "x": 2.0,  "y": -1.0, "z": 0.0 },
+            "rotation": { "x": 0.0,  "y": 0.0,  "z": 0.0 },
+            "scale":    { "x": 1.2,  "y": 1.2,  "z": 1.0 },
+            "metadata": [
+                { "key": "buildingName",    "value": "Roric's Forge" },
+                { "key": "interactable",    "value": "true" },
+                { "key": "craftingStation", "value": "Anvil" }
+            ]
+        },
+        {
+            "id": "oak_tree_01",
+            "prefabPath": "Prefabs/Environment/OakTree",
+            "entityType": "EnvironmentProp",
+            "position": { "x": 1.0,  "y": 2.5,  "z": 0.0 },
+            "rotation": { "x": 0.0,  "y": 0.0,  "z": 5.0 },
+            "scale":    { "x": 1.1,  "y": 1.1,  "z": 1.0 },
+            "metadata": []
+        },
+        {
+            "id": "oak_tree_02",
+            "prefabPath": "Prefabs/Environment/OakTree",
+            "entityType": "EnvironmentProp",
+            "position": { "x": 3.2,  "y": 2.8,  "z": 0.0 },
+            "rotation": { "x": 0.0,  "y": 0.0,  "z": -3.0 },
+            "scale":    { "x": 0.9,  "y": 0.9,  "z": 1.0 },
+            "metadata": []
+        },
+        {
+            "id": "rock_cluster_01",
+            "prefabPath": "Prefabs/Environment/RockCluster",
+            "entityType": "EnvironmentProp",
+            "position": { "x": 6.0,  "y": 1.0,  "z": 0.0 },
+            "rotation": { "x": 0.0,  "y": 0.0,  "z": 0.0 },
+            "scale":    { "x": 1.0,  "y": 1.0,  "z": 1.0 },
+            "metadata": []
+        },
+        {
+            "id": "ruin_wall_01",
+            "prefabPath": "Prefabs/Environment/RuinWall",
+            "entityType": "EnvironmentProp",
+            "position": { "x": -3.0, "y": 2.0,  "z": 0.0 },
+            "rotation": { "x": 0.0,  "y": 0.0,  "z": 0.0 },
+            "scale":    { "x": 2.0,  "y": 1.0,  "z": 1.0 },
+            "metadata": []
+        },
+        {
+            "id": "goblin_camp",
+            "prefabPath": "Prefabs/World/Triggers/GoblinCampTrigger",
+            "entityType": "BattleTrigger",
+            "position": { "x": -5.0, "y": 3.0,  "z": 0.0 },
+            "rotation": { "x": 0.0,  "y": 0.0,  "z": 0.0 },
+            "scale":    { "x": 2.0,  "y": 2.0,  "z": 1.0 },
+            "metadata": [
+                { "key": "battleSceneName", "value": "BattleScene" },
+                { "key": "enemyGroupId",    "value": "ember_village_goblins" },
+                { "key": "difficulty",      "value": "1" },
+                { "key": "description",     "value": "A goblin raiding party camped in the northern ruins." }
+            ]
+        }
+    ]
+}
