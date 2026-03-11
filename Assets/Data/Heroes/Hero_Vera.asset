@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff4e77ff748d4cbba9e5bdb6a27784f, type: 3}
+  m_Name: Hero_Vera
+  m_EditorClassIdentifier:
+  heroName: Vera
+  lore: She never misses, and she never lets you forget it. Swift, precise, and armed
+    with a tongue sharper than any arrow. Vera makes survival look effortless.
+  portrait: {fileID: 0}
+  fullArt: {fileID: 0}
+  combatType: 1
+  abilities:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  baseStats:
+    maxHP: 85
+    attack: 15
+    magicPower: 0
+    defense: 6
+    magicDefense: 8
+    speed: 5
+    critChance: 18

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff4e77ff748d4cbba9e5bdb6a27784f, type: 3}
+  m_Name: Hero_Iris
+  m_EditorClassIdentifier:
+  heroName: Iris
+  lore: Gentle as dawn, relentless as the tide. Iris heals without question and fights
+    without mercy when those she loves are threatened. Light bends to her will.
+  portrait: {fileID: 0}
+  fullArt: {fileID: 0}
+  combatType: 3
+  abilities:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  baseStats:
+    maxHP: 75
+    attack: 6
+    magicPower: 85
+    defense: 4
+    magicDefense: 55
+    speed: 3
+    critChance: 5
