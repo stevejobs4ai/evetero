@@ -16,11 +16,11 @@ namespace Evetero.Tests
         [SetUp]
         public void SetUp()
         {
-            var go = new GameObject("SaveManager");
+            var go       = new GameObject("SaveManager");
             _saveManager = go.AddComponent<SaveManager>();
             _savePath    = _saveManager.SavePath;
 
-            // Start each test with no leftover save file.
+            // Start each test with a clean slate.
             if (File.Exists(_savePath)) File.Delete(_savePath);
         }
 
@@ -55,32 +55,31 @@ namespace Evetero.Tests
         [Test]
         public void SaveManager_RoundTripXP()
         {
-            // Create a hero with HeroSkills and give it some XP.
+            // Give a hero some Woodcutting XP.
             var heroGo     = new GameObject("TestHero");
             var heroSkills = heroGo.AddComponent<HeroSkills>();
             heroSkills.GainXP(SkillType.Woodcutting, 100);
 
-            // Ensure the manual save captured the state (GainXP may not level-up,
-            // so we force a save here as well).
+            // Force a save (GainXP only auto-saves on level-up; level 1→1 here).
             _saveManager.SaveGame();
 
-            // Remove the hero to simulate a fresh scene load.
             Object.DestroyImmediate(heroGo);
 
             var data = _saveManager.LoadGame();
             Assert.IsNotNull(data);
 
-            var xpDict = data.GetHeroXP();
-            Assert.IsTrue(xpDict.ContainsKey("TestHero:Woodcutting"),
-                          "Saved data should contain the composite hero:skill key");
-            Assert.AreEqual(100f, xpDict["TestHero:Woodcutting"], 0.01f,
-                            "Loaded XP should match the saved value");
+            var xpDict = data.GetHeroXPDict();
+            Assert.IsTrue(xpDict.ContainsKey("TestHero"),
+                          "Saved data should contain an entry for TestHero");
+
+            int[] xp = xpDict["TestHero"];
+            Assert.AreEqual(100, xp[(int)SkillType.Woodcutting],
+                            "Loaded Woodcutting XP should match the saved value");
         }
 
         [Test]
         public void SaveManager_HandlesNoFile()
         {
-            // Guarantee no file exists.
             if (File.Exists(_savePath)) File.Delete(_savePath);
 
             SaveData result = null;

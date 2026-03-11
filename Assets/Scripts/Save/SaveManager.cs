@@ -102,6 +102,20 @@ namespace Evetero
 
         // ── Public API ────────────────────────────────────────────────────────
 
+        /// <summary>Alias for Save() — satisfies the public SaveGame/LoadGame contract.</summary>
+        public void SaveGame() => Save();
+
+        /// <summary>
+        /// Read the save file and return the raw SaveData without restoring scene state.
+        /// Returns null when no file exists or the file cannot be parsed.
+        /// </summary>
+        public SaveData LoadGame()
+        {
+            if (!File.Exists(SaveFilePath)) return null;
+            try   { return JsonUtility.FromJson<SaveData>(File.ReadAllText(SaveFilePath)); }
+            catch { return null; }
+        }
+
         /// <summary>Collect current game state and write it to disk as JSON.</summary>
         public void Save()
         {
